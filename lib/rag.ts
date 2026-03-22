@@ -98,7 +98,7 @@ async function callGroqChat(prompt: string): Promise<string> {
       'Authorization': `Bearer ${GROQ_API_KEY}`,
     },
     body: JSON.stringify({
-      model: 'openai/gpt-oss-120b',
+      model: 'llama-3.3-70b-versatile',
       messages: [
         {
           role: 'system',
