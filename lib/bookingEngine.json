@@ -1,0 +1,45 @@
+{
+  "intents": {
+    "book_appointment": ["appointment", "book", "doctor dekhaite chai", "doctor", "checkup"],
+    "confirm_appointment": ["yes", "ok", "confirm", "sure", "haan", "hmm", "hae", "obviously", "chalo", "chal", "jai"],
+    "provide_user_info": ["name", "phone", "amar nam", "my name", "01"]
+  },
+
+  "states": {
+    "start": {
+      "on_intent": "book_appointment",
+      "response": "Sure! Please select a date.",
+      "next": "awaiting_date"
+    },
+
+    "awaiting_date": {
+      "action": "store_date",
+      "response": "Please select a time slot.",
+      "next": "awaiting_time"
+    },
+
+    "awaiting_time": {
+      "action": "store_time",
+      "response": "We have {{time}} on {{date}}. Do you want to confirm?",
+      "next": "awaiting_confirmation"
+    },
+
+    "awaiting_confirmation": {
+      "on_intent": "confirm_appointment",
+      "response": "Great! Please provide your name and phone number.",
+      "next": "awaiting_user_info"
+    },
+
+    "awaiting_user_info": {
+      "on_intent": "provide_user_info",
+      "action": "save_appointment",
+      "response": "✅ Thank you {{name}}! Your appointment is confirmed for {{date}} at {{time}}.",
+      "next": "completed"
+    },
+
+    "done": {
+      "response": "Your appointment is already booked. Do you need anything else?",
+      "next": "start"
+    }
+  }
+}
